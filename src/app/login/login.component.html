@@ -1,0 +1,79 @@
+
+<div id="login-screen">
+  <div class="container">
+    <div class="hero-text">
+      <h1>
+        Because Accomplishing<br/>
+        Is Better Together
+      </h1>
+    </div>
+    <div class="row" *ngIf="!showRegistration">
+      <div class="col panel-wrapper">
+        <div class="panel">
+          <div class="panel-inner">
+            <form class="container" #loginForm="ngForm" (submit)="login(loginForm.value)">
+              <h2>Login</h2>
+              <div class="form-group">
+                <label for="username">Username:</label>
+                <input id="username" name="username" class="form-control" ngModel required/>
+              </div>
+              <div class="form-group">
+                <label for="password">Password:</label>
+                <input id="password" name="password" type="password" class="form-control" ngModel required/>
+              </div>
+              <input type="submit" class="btn btn-primary float-right" value="Login" />
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col panel-wrapper">
+          <div class="panel">
+            <div class="panel-inner">
+              <div class="container">
+                <h2>Or join now</h2>
+                <p class="join-text">
+                  Register in seconds!
+                </p>
+                <input type="submit" class="btn btn-primary float-right" value="Join" (click)="showRegistrationForm()"/>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="showRegistration">
+      <div class="col panel-wrapper">
+        <div class="panel registration-form">
+          <div class="panel-inner">
+            <form (ngSubmit)="createUser(registrationForm)" #registrationForm="ngForm">
+              <div class="form-group">
+                <label for="reg-username">Username:</label>
+                <input id="reg-username" name="username" class="form-control" ngModel required/>
+              </div>
+              <div class="form-group">
+                <label for="reg-password">Password:</label>
+                <input id="reg-password" name="password" class="form-control" ngModel required/>
+              </div>
+              <div class="form-group">
+                <label for="reg-password-confirm">Confirm:</label>
+                <input id="reg-password-confirm" name="password-confirm" class="form-control" ngModel required/>
+              </div>
+              <div class="form-group">
+                <label for="reg-email">Email:</label>
+                <input id="reg-email" name="email" class="form-control" type="email" ngModel required/>
+              </div>
+              <div class="form-group">
+                <label for="reg-firstname">First Name:</label>
+                <input id="reg-firstname" name="fistname" class="form-control" ngModel required/>
+              </div>
+              <div class="form-group">
+                <label for="reg-lastname">Last Name:</label>
+                <input id="reg-lastname" name="lastname" class="form-control" ngModel required/>
+              </div>
+              <input class="btn btn-primary float-right" type="submit" value="Join" [disabled]="!registrationForm.form.valid"/>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
