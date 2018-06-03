@@ -8,6 +8,7 @@ import { ApiService } from '../services/api.service';
 })
 export class LoginComponent implements OnInit {
 
+  public showRegistration = false;
   constructor(private api: ApiService) { }
 
   ngOnInit() {
