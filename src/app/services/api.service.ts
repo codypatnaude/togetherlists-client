@@ -33,7 +33,7 @@ export class ApiService {
 
   private authorizedGet(url: string) {
     const httpOptions = {
-      headers: new HttpHeaders({'Authorization': `JWT ${this.authToken}`})
+      headers: new HttpHeaders({'Authorization': `Bearer ${this.authToken}`})
     };
     console.log(httpOptions);
     return this.http.get(this.apiEndpoint + url, httpOptions);
