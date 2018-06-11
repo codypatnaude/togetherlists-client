@@ -16,9 +16,11 @@ export class LoginComponent implements OnInit {
   }
 
   login(credentials) {
+    console.log('calling login!');
     this.api.login(credentials)
     .subscribe(
       (data) => {
+        console.log('navigating');
         this.router.navigate(['dashboard']);
       }
     );

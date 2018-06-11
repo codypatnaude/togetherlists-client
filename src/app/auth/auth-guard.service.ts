@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { ApiService } from '../services/api.service';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuardService implements CanActivate {
 
-  constructor(private api: ApiService) { }
+  constructor(private auth: AuthService) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean>|Promise<boolean>|boolean {
-    return this.api.verifyAuthToken();
+    console.log(`Authenticating: ${this.auth.isAuthenticated()}`);
+    return this.auth.isAuthenticated();
   }
 }

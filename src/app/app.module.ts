@@ -11,7 +11,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListSelectorComponent } from './list-selector/list-selector.component';
 import { ListComponent } from './list/list.component';
 import { ListIoService } from './services/websocket/list-io.service';
-
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthService, tokenGetter } from './auth/auth.service';
+import { ItemInputComponent } from './item-input/item-input.component';
 
 @NgModule({
   declarations: [
@@ -19,15 +21,23 @@ import { ListIoService } from './services/websocket/list-io.service';
     LoginComponent,
     DashboardComponent,
     ListSelectorComponent,
-    ListComponent
+    ListComponent,
+    ItemInputComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        whitelistedDomains: ['localhost:3000', 'togetherlists.com'],
+        blacklistedRoutes: ['localhost:3000/auth/', 'togetherlists.com/auth/']
+      }
+    })
   ],
-  providers: [ApiService, ListIoService],
+  providers: [ApiService, ListIoService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

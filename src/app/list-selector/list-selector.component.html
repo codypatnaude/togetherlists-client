@@ -1,3 +1,3 @@
-<p>
-  list-selector works!
-</p>
+<select class="form-control" (change)="UpdateSelection()" [(ngModel)]="listId">
+  <option *ngFor="let list of lists" [value]="list.id">{{list.name}}</option>
+</select>

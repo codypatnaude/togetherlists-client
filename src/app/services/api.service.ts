@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,51 +12,39 @@ export class ApiService {
 
   apiEndpoint: string = environment.API_ROOT;
   authToken!: string;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private auth: AuthService) { }
 
 
   isLoggedIn() {
-    return !!this.authToken;
+    return this.auth.isAuthenticated();
   }
 
   login(credentials) {
+    console.log(credentials);
     return this.http.post(this.apiEndpoint + '/auth', credentials)
     .pipe(
-      tap((results: any) => this.authToken = results && results.token),
+      tap((results: any) => this.auth.setToken(results.token)),
+      catchError((err, caught) => {
+        console.error(err);
+        return of({});
+      })
     );
   }
 
-  verifyAuthToken(): Promise<boolean> {
-    return new Promise(
-      (resolve, reject) => {
-        this.authorizedGet('/auth/verify')
-        .subscribe(
-          (response) => {
-            if (response === true) {
-              resolve(true);
-            } else {
-              resolve(false);
-            }
-          },
-          (err) => resolve(false),
-        );
-      }
-    );
+  public getLists() {
+    return this.http.get(this.apiEndpoint + '/list');
   }
 
-  private authorizedPost(url: string, data: any) {
-    const httpOptions = {
-      headers: new HttpHeaders({'Authorization': this.authToken})
-    };
-    return this.http.post(this.apiEndpoint + url, data, httpOptions);
+  public getListDetails(id): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiEndpoint}/list/${id}/details`);
   }
 
-  private authorizedGet(url: string) {
-    const httpOptions = {
-      headers: new HttpHeaders({'Authorization': `Bearer ${this.authToken}`})
-    };
-    console.log(httpOptions);
-    return this.http.get(this.apiEndpoint + url, httpOptions);
+  public updateListDetail(listId, listDetailId, listDetail) {
+    return this.http.put(`${this.apiEndpoint}/list/${listId}/detail/${listDetailId}`, listDetail);
+  }
+
+  public addListDetail(listId, item) {
+    return this.http.post(`${this.apiEndpoint}/list/${listId}/detail`, item);
   }
 
 }
