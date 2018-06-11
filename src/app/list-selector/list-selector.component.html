@@ -1,3 +1,12 @@
-<select class="form-control" (change)="UpdateSelection()" [(ngModel)]="listId">
+<form class="row" *ngIf="showNewListEntry" #newListForm="ngForm" (submit)="CreateList(newListForm)">
+  <div class="col-10">
+    <input class="form-control" name="name" ngModel/>
+  </div>
+  <div class="col-2">
+    <input type="submit" value="Create" class="btn btn-primary"/> 
+  </div>
+</form>
+<select class="form-control" (change)="UpdateSelection()" [(ngModel)]="listId" *ngIf="!showNewListEntry">
+  <option value="NEW_LIST">New List...</option>
   <option *ngFor="let list of lists" [value]="list.id">{{list.name}}</option>
 </select>

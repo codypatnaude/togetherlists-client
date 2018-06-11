@@ -47,4 +47,8 @@ export class ApiService {
     return this.http.post(`${this.apiEndpoint}/list/${listId}/detail`, item);
   }
 
+  public createList(list) {
+    return this.http.post<any>(`${this.apiEndpoint}/list`, list);
+  }
+
 }
