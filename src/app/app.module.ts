@@ -32,8 +32,8 @@ import { ItemInputComponent } from './item-input/item-input.component';
     JwtModule.forRoot({
       config: {
         tokenGetter,
-        whitelistedDomains: ['localhost:3000', 'togetherlists.com'],
-        blacklistedRoutes: ['localhost:3000/auth/', 'togetherlists.com/auth/']
+        whitelistedDomains: ['localhost:3000', 'api.togetherlists.com'],
+        blacklistedRoutes: ['localhost:3000/auth/', 'api.togetherlists.com/auth/']
       }
     })
   ],
