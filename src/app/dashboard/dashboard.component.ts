@@ -47,6 +47,15 @@ export class DashboardComponent implements OnInit {
         tap(data => console.log(data)),
       )
       .subscribe(details => {
+        details.sort((a, b) => {
+          if (a.ordering > b.ordering) {
+            return 1;
+          } else if (a.ordering === b.ordering) {
+            return 0;
+          } else {
+            return -1;
+          }
+        });
         this.listDetails = details;
         this.listIo.requestList(this.list.id);
       });

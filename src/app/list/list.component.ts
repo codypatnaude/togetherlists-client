@@ -13,9 +13,22 @@ export class ListComponent implements OnInit {
   @Output()
   itemUpdate = new EventEmitter<any>();
 
+  sortableOptions = {
+    onUpdate: (event: any) => this.OnSortUpdate(event)
+  };
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  OnSortUpdate(event: any) {
+    console.log(event);
+    console.log(this.listDetails);
+    this.listDetails.forEach((item, index) => {
+      item.ordering = index;
+      this.itemUpdate.emit(item);
+    });
   }
 
   HandleItemChange(item) {

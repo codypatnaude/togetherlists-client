@@ -1,5 +1,5 @@
 <div class="container">
   <app-list-selector (update)="UpdateSelectedList($event)"></app-list-selector>
   <app-list [listDetails]="listDetails" (itemUpdate)="UpdateItem($event)"></app-list>
-  <app-item-input (addItem)="AddListItem($event)"></app-item-input>
+  <app-item-input (addItem)="AddListItem($event)" *ngIf="list"></app-item-input>
 </div>

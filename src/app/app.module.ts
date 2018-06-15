@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { SortablejsModule } from 'angular-sortablejs';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -35,7 +35,8 @@ import { ItemInputComponent } from './item-input/item-input.component';
         whitelistedDomains: ['localhost:3000', 'api.togetherlists.com'],
         blacklistedRoutes: ['localhost:3000/auth/', 'api.togetherlists.com/auth/']
       }
-    })
+    }),
+    SortablejsModule.forRoot({})
   ],
   providers: [ApiService, ListIoService, AuthService],
   bootstrap: [AppComponent]
