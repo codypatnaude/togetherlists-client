@@ -3,7 +3,16 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
+body {
+  background: #fafafa;
+}
 
 .form-inline .btn {
   margin-left: 10px;
+}
+
+.container {
+  background: #fff;
+  height: 100vh;
+  position: relative;
 }

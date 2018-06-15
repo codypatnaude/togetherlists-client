@@ -14,7 +14,8 @@ export class ListComponent implements OnInit {
   itemUpdate = new EventEmitter<any>();
 
   sortableOptions = {
-    onUpdate: (event: any) => this.OnSortUpdate(event)
+    onUpdate: (event: any) => this.OnSortUpdate(event),
+    handle: '.handle'
   };
 
   constructor() { }

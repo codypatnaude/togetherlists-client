@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { ListIoService } from '../services/websocket/list-io.service';
 import { tap } from 'rxjs/operators';
+import { LocalStorage } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,15 +13,20 @@ export class DashboardComponent implements OnInit {
 
   constructor(private api: ApiService, private listIo: ListIoService) { }
 
+  @LocalStorage()
   list;
   listDetails: any[];
 
   ngOnInit() {
-    console.log('calling list-io connect');
+
     this.listIo.connect();
     this.listIo.item.subscribe(newItem => {
       this.HandleNewItem(newItem);
     });
+
+    if (this.list) {
+      this.UpdateSelectedList(this.list);
+    }
   }
 
   HandleNewItem(item) {
@@ -51,7 +57,7 @@ export class DashboardComponent implements OnInit {
           if (a.ordering > b.ordering) {
             return 1;
           } else if (a.ordering === b.ordering) {
-            return 0;
+            return a.id > b.id ? 1 : -1;
           } else {
             return -1;
           }

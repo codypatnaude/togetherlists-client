@@ -14,6 +14,8 @@ import { ListIoService } from './services/websocket/list-io.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthService, tokenGetter } from './auth/auth.service';
 import { ItemInputComponent } from './item-input/item-input.component';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
+import {Ng2Webstorage} from 'ngx-webstorage';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { ItemInputComponent } from './item-input/item-input.component';
         blacklistedRoutes: ['localhost:3000/auth/', 'api.togetherlists.com/auth/']
       }
     }),
-    SortablejsModule.forRoot({})
+    SortablejsModule.forRoot({}),
+    AngularFontAwesomeModule,
+    Ng2Webstorage
   ],
   providers: [ApiService, ListIoService, AuthService],
   bootstrap: [AppComponent]
