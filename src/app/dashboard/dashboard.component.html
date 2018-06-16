@@ -1,11 +1,15 @@
 <div id="dashboard" class="container">
-  <div class="list-header">
-    <app-list-selector (update)="UpdateSelectedList($event)" [listId]="list && list.id"></app-list-selector>
+  <div class="fixed header">
+    <div class="list-header container">
+      <app-list-selector (update)="UpdateSelectedList($event)" [listId]="list && list.id"></app-list-selector>
+    </div>
   </div>
   <div class="list-content" *ngIf="list">
     <app-list [listDetails]="listDetails" (itemUpdate)="UpdateItem($event)"></app-list>
   </div>
-  <div class="list-footer" *ngIf="list">
-    <app-item-input (addItem)="AddListItem($event)"></app-item-input>
+  <div class="fixed footer">
+    <div class="list-footer container" *ngIf="list">
+      <app-item-input (addItem)="AddListItem($event)"></app-item-input>
+    </div>
   </div>
 </div>
