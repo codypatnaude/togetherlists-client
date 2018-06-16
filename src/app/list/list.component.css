@@ -6,7 +6,6 @@
 }
 
 .list-item input[type=checkbox] {
-  float: right;
   margin-top: 2px;
   margin-right: 10px;
   -webkit-appearance: none;

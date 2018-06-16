@@ -13,6 +13,9 @@ export class ListComponent implements OnInit {
   @Output()
   itemUpdate = new EventEmitter<any>();
 
+  @Output()
+  itemDelete = new EventEmitter<any>();
+
   sortableOptions = {
     onUpdate: (event: any) => this.OnSortUpdate(event),
     handle: '.handle'
@@ -36,5 +39,9 @@ export class ListComponent implements OnInit {
     console.log('item changed!');
     console.log(item);
     this.itemUpdate.emit(item);
+  }
+
+  DeleteItem(item) {
+    this.itemDelete.emit(item);
   }
 }

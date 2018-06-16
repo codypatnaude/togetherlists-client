@@ -4,7 +4,7 @@
     <div class="col-md-1 handle d-none d-lg-block">
       <fa name="arrows"></fa>
     </div>
-    <div class="col-md-10 d-none d-lg-block">
+    <div class="col-md-9 d-none d-lg-block">
       <span *ngIf="!item.allowEdit" (dblclick)="item.allowEdit = true">{{item.text}}</span>
       <div *ngIf="item.allowEdit === true">
         <input [(ngModel)]="item.text" (keyup.enter)="item.allowEdit = undefined; HandleItemChange(item)" class="form-control form-control-sm"/>
@@ -12,6 +12,9 @@
     </div>
     <div class="col-md-1 d-none d-lg-block">
       <input type="checkbox" [(ngModel)]="item.complete" (change)="HandleItemChange(item)"/>
+    </div>
+    <div class="col-md-1 d-none d-lg-block">
+      <fa name="trash" class="pl-4" *ngIf="!item.allowEdit" (click)="DeleteItem(item)"></fa>
     </div>
 
     <div class="d-lg-none d-block mobile-list-item">
@@ -29,6 +32,7 @@
         <fa name="check-square" class="p-2" *ngIf="item.allowEdit" (click)="item.allowEdit = undefined; HandleItemChange(item)"></fa>
         <fa name="edit" class="p-2" *ngIf="!item.allowEdit" (click)="item.allowEdit = true"></fa>
         <input type="checkbox" [(ngModel)]="item.complete" (change)="HandleItemChange(item)"/>
+        <fa name="trash" class="pl-4" *ngIf="!item.allowEdit" (click)="DeleteItem(item)"></fa>
       </div>
     </div>
   </div>

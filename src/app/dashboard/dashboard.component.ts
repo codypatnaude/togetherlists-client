@@ -78,4 +78,30 @@ export class DashboardComponent implements OnInit {
     .subscribe((data) => console.log(data));
   }
 
+  HandleItemDelete(item) {
+    console.log('deleting item');
+    this.api.deleteListDetail(this.list.id, item)
+    .subscribe(
+      () => item.deleted = true
+    );
+  }
+
+  SortList() {
+    if (!this.listDetails) {
+      return [];
+    }
+    const filtered = this.listDetails.filter(elem => !elem.deleted);
+
+    filtered.sort((a, b) => {
+      if (a.ordering > b.ordering) {
+        return 1;
+      } else if (a.ordering === b.ordering) {
+        return a.id > b.id ? 1 : -1;
+      } else {
+        return -1;
+      }
+    });
+    return filtered;
+  }
+
 }

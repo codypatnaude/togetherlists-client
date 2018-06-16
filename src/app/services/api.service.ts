@@ -47,6 +47,10 @@ export class ApiService {
     return this.http.post(`${this.apiEndpoint}/list/${listId}/detail`, item);
   }
 
+  public deleteListDetail(listId, item) {
+    return this.http.delete(`${this.apiEndpoint}/list/${listId}/detail/${item.id}`);
+  }
+
   public createList(list) {
     return this.http.post<any>(`${this.apiEndpoint}/list`, list);
   }
