@@ -41,3 +41,23 @@
 .handle {
   color: #868686;
 }
+
+.mobile-handle {
+  padding: 0 10px;
+}
+
+.mobile-check {
+  float: right;
+}
+
+.mobile-item-text {
+  width: 65%;
+}
+
+.mobile-item-text .form-inline {
+  display: inline-block;
+}
+
+.mobile-list-item {
+  width: 100%;
+}

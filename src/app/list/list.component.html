@@ -1,16 +1,35 @@
 <div [sortablejs]="listDetails" [sortablejsOptions]="sortableOptions">
   <div *ngFor="let item of listDetails" class="list-item row">
-    <div class="col-sm-1 handle">
-        <fa name="arrows"></fa>
+
+    <div class="col-md-1 handle d-none d-lg-block">
+      <fa name="arrows"></fa>
     </div>
-    <div class="col-sm-10">
+    <div class="col-md-10 d-none d-lg-block">
+      <span *ngIf="!item.allowEdit" (dblclick)="item.allowEdit = true">{{item.text}}</span>
+      <div *ngIf="item.allowEdit === true">
+        <input [(ngModel)]="item.text" (keyup.enter)="item.allowEdit = undefined; HandleItemChange(item)" class="form-control form-control-sm"/>
+      </div>
+    </div>
+    <div class="col-md-1 d-none d-lg-block">
+      <input type="checkbox" [(ngModel)]="item.complete" (change)="HandleItemChange(item)"/>
+    </div>
+
+    <div class="d-lg-none d-block mobile-list-item">
+      <div class="mobile-handle handle d-inline-block">
+          <fa name="arrows"></fa>
+      </div>
+      <div class="mobile-item-text d-inline-block">
         <span *ngIf="!item.allowEdit" (dblclick)="item.allowEdit = true">{{item.text}}</span>
-        <div *ngIf="item.allowEdit === true">
+        <div *ngIf="item.allowEdit" class="form-inline">
           <input [(ngModel)]="item.text" (keyup.enter)="item.allowEdit = undefined; HandleItemChange(item)" class="form-control form-control-sm"/>
         </div>
-    </div>
-    <div class="col-sm-1">
-      <input type="checkbox" [(ngModel)]="item.complete" (change)="HandleItemChange(item)"/>
+
+      </div>
+      <div class="mobile-check d-inline-block">
+        <fa name="check-square" class="p-2" *ngIf="item.allowEdit" (click)="item.allowEdit = undefined; HandleItemChange(item)"></fa>
+        <fa name="edit" class="p-2" *ngIf="!item.allowEdit" (click)="item.allowEdit = true"></fa>
+        <input type="checkbox" [(ngModel)]="item.complete" (change)="HandleItemChange(item)"/>
+      </div>
     </div>
   </div>
 </div>
