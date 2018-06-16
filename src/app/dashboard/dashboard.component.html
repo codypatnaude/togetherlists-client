@@ -1,6 +1,6 @@
-<div class="container">
+<div id="dashboard" class="container">
   <div class="list-header">
-    <app-list-selector (update)="UpdateSelectedList($event)" [listId]="list.id"></app-list-selector>
+    <app-list-selector (update)="UpdateSelectedList($event)" [listId]="list && list.id"></app-list-selector>
   </div>
   <div class="list-content" *ngIf="list">
     <app-list [listDetails]="listDetails" (itemUpdate)="UpdateItem($event)"></app-list>
