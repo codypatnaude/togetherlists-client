@@ -53,6 +53,12 @@
   width: 60%;
 }
 
+@media (max-width: 400px) {
+  .mobile-item-text {
+    width: 50%;
+  }
+}
+
 .mobile-item-text .form-inline {
   display: inline-block;
 }
