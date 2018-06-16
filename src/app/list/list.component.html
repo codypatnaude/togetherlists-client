@@ -1,15 +1,15 @@
 <div [sortablejs]="listDetails" [sortablejsOptions]="sortableOptions">
   <div *ngFor="let item of listDetails" class="list-item row">
-    <div class="col-1 handle">
+    <div class="col-sm-1 handle">
         <fa name="arrows"></fa>
     </div>
-    <div class="col-10">
+    <div class="col-sm-10">
         <span *ngIf="!item.allowEdit" (dblclick)="item.allowEdit = true">{{item.text}}</span>
         <div *ngIf="item.allowEdit === true">
           <input [(ngModel)]="item.text" (keyup.enter)="item.allowEdit = undefined; HandleItemChange(item)" class="form-control form-control-sm"/>
         </div>
     </div>
-    <div class="col-1">
+    <div class="col-sm-1">
       <input type="checkbox" [(ngModel)]="item.complete" (change)="HandleItemChange(item)"/>
     </div>
   </div>
