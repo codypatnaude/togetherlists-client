@@ -26,4 +26,15 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  createUser(userDetails) {
+    console.log('calling login!');
+    this.api.createUser(userDetails)
+    .subscribe(
+      (data) => {
+        console.log('navigating');
+        this.router.navigate(['dashboard']);
+      }
+    );
+  }
+
 }

@@ -31,6 +31,17 @@ export class ApiService {
     );
   }
 
+  createUser(user) {
+    return this.http.post(this.apiEndpoint + '/user', user)
+    .pipe(
+      tap((results: any) => this.auth.setToken(results.token)),
+      catchError((err, caught) => {
+        console.error(err);
+        return of({});
+      })
+    );
+  }
+
   public getLists() {
     return this.http.get(this.apiEndpoint + '/list');
   }
